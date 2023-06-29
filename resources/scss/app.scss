@@ -1,0 +1,28 @@
+/* importo bootstrap dalla cartella node_modules usando l'alias settato in vite.config.js */
+@import "~bootstrap/scss/bootstrap";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+}
+
+body {
+    background-color: #222;
+    color: white;
+}
+
+header,
+footer {
+    width: 100%;
+    background: #EEE;
+    color: black;
+}
+
+header img.logo {
+    height: 2rem;
+}

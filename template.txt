@@ -1,0 +1,84 @@
+###########################################################################################
+# Creazione progetto con Laravel 9.2
+###########################################################################################
+composer create-project --prefer-dist laravel/laravel:^9.2 .
+
+###########################################################################################
+# Pacchetti npm: da postcss a sass con bootstrap
+###########################################################################################
+npm remove postcss
+npm i
+npm i bootstrap @popperjs/core
+npm i --D sass
+
+###########################################################################################
+# Configurazione vite (in vite.config.js)
+###########################################################################################
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+/* Add the path constant - verrá usata per creare degli alias a cartelle di sistema */
+const path = require('path')
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/scss/app.scss', 'resources/js/app.js'], // Modifichiamo il percorso del css usando sass
+            refresh: true,
+        }),
+    ],
+    /* Aggiungere l'oggetto resolve con relativi alias come da documentazione  */
+    resolve: {
+        alias: {
+            '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
+            '~resources': '/resources/' //Aggiungiamo un alias per la cartella /resources/
+        }
+    },
+});
+
+###########################################################################################
+# Adatto i file
+###########################################################################################
+Rinomino /resources/css in /resources/scss
+Rinomino /resources/css/app.css in /resources/scss/app.scss
+
+###########################################################################################
+# Importo bootstrap (in /resources/scss/app.scss)
+###########################################################################################
+@import "~bootstrap/scss/bootstrap";
+
+body {
+    background-color: red;
+}
+
+###########################################################################################
+# Importo il nostro SASS e Bootstrap (in /resources/js/app.js)
+###########################################################################################
+
+//Vecchio import del "bootstrap" di Laravel
+//Non si tratta del framework CSS ma del "bootstrap" cioè delle istruzioni iniziali
+//In pratica importa le librerie lodash e axios
+import './bootstrap';
+
+//Importo il nostro sass
+import '~resources/scss/app.scss'
+
+//Importo il JS di Bootstrap
+import * as bootstrap from 'bootstrap'
+
+//Informo Vite di processare le immagini presenti in /resources/img
+import.meta.glob('../img/**');
+
+###########################################################################################
+# Includo gli assets nel template html (in resources/views/welcome.blade.php)
+# app.js importa bootstrap e il nostro sass
+###########################################################################################
+<head>
+...
+@vite('resources/js/app.js')
+...
+</head>
+
+###########################################################################################
+# Creare layout, partials ecc..
+###########################################################################################
+
