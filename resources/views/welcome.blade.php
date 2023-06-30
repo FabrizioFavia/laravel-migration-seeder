@@ -2,10 +2,27 @@
 
 @section('content')
     <div class="container my-3">
+
         <h1>ORARI TRENI</h1>
         <div class="row g-4">
             <div class="col">
 
+                <form class="row w-100 d-flex justify-content-start" action="/" method="GET">
+                    <div class="mb-3 col-3">
+                        <label for="company" class="form-label">Company:</label>
+                        <input type="text" class="form-control" id="company" name="company">
+                    </div>
+                    <div class="mb-3 col-3">
+                        <label for="train_code" class="form-label">Train Code:</label>
+                        <input type="text" class="form-control" id="train_code" name="train_code">
+                    </div>
+                    <div class="col-1 d-flex align-items-center">
+                        <button onclick="queryReset()" type="reset" class="btn btn-danger mt-3 ">Cancella</button>
+                        <button type="submit" class="btn btn-primary mt-3 ms-3">Invia</button>
+
+
+                    </div>
+                </form>
 
                 <table class="table">
                     <thead>
@@ -48,3 +65,10 @@
 
     </div>
 @endsection
+
+
+<script>
+    function queryReset() {
+        window.location.href = "/";
+    }
+</script>
