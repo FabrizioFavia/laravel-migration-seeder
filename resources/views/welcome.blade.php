@@ -38,23 +38,11 @@
                                 @else
                                     <td>In orario</td>
                                 @endif
-
-
-
-
-
-
-
                             </tr>
                         @endforeach
 
                     </tbody>
                 </table>
-
-
-
-
-
             </div>
         </div>
 
